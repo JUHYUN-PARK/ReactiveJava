@@ -179,20 +179,34 @@ public class FirstExample {
 	
 	public static void main(String[] args) {
 		FirstExample demo = new FirstExample();
-		demo.emit();
-		demo.code2by2();
-		demo.code2by3();
-		demo.code2by7();
-		demo.code2by10();
-		demo.code2by14();
-		demo.code2by16();
-		demo.code2by19();
-		demo.code2by20();
-		demo.code2by23();
-		demo.code2by24();
-		demo.code2by26();
-		demo.code2by27();
-		demo.code2by28();
-		demo.code2by29();
+//		demo.emit();
+//		demo.code2by2();
+//		demo.code2by3();
+//		demo.code2by7();
+//		demo.code2by10();
+//		demo.code2by14();
+//		demo.code2by16();
+//		demo.code2by19();
+//		demo.code2by20();
+//		demo.code2by23();
+//		demo.code2by24();
+//		demo.code2by26();
+//		demo.code2by27();
+//		demo.code2by28();
+//		demo.code2by29();
+
+		Chapter3Example demo3 = new Chapter3Example();
+//		demo3.mapExample();
+//		demo3.mapExample2();
+//		demo3.flatMapExample();
+//		demo3.flatMapLambdaExample();
+//		demo3.standardGuGudan();
+//		demo3.rxGugudan();
+//		demo3.rxGugudan2();
+//		demo3.rxGugudan3();
+//		demo3.filterExample();
+//		demo3.filterExample2();
+//		demo3.reduceExample();
+		demo3.simpleDataQueryExample();
 	}
 }
