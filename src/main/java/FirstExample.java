@@ -8,6 +8,7 @@ import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.ReplaySubject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
@@ -177,7 +178,7 @@ public class FirstExample {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		FirstExample demo = new FirstExample();
 //		demo.emit();
 //		demo.code2by2();
@@ -207,6 +208,18 @@ public class FirstExample {
 //		demo3.filterExample();
 //		demo3.filterExample2();
 //		demo3.reduceExample();
-		demo3.simpleDataQueryExample();
+//		demo3.simpleDataQueryExample();
+
+		Chapter4Example demo4 = new Chapter4Example();
+//		demo4.intervalExample();
+//		demo4.intervalExample2();
+//		demo4.timerExample();
+//		demo4.rangeExample();
+//		demo4.intervalRangeExample();
+//		demo4.intervalRaangeExample2();
+//		demo4.marbleDiagram();
+//		demo4.repeatExample();
+//		demo4.pingExample();
+		demo4.pingExample2();
 	}
 }
