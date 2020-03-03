@@ -207,7 +207,7 @@ public class FirstExample {
 //		demo3.rxGugudan3();
 //		demo3.filterExample();
 //		demo3.filterExample2();
-//		demo3.reduceExample();
+		demo3.reduceExample();
 //		demo3.simpleDataQueryExample();
 
 		Chapter4Example demo4 = new Chapter4Example();
@@ -220,6 +220,12 @@ public class FirstExample {
 //		demo4.marbleDiagram();
 //		demo4.repeatExample();
 //		demo4.pingExample();
-		demo4.pingExample2();
+//		demo4.pingExample2();
+
+		TransformOperatorExample toExample = new TransformOperatorExample();
+//		toExample.concatMapExample();
+//		toExample.switchMapExample();
+//		toExample.groupByExample();
+		toExample.scanExample();
 	}
 }

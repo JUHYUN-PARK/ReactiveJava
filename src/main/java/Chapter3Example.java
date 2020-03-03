@@ -5,6 +5,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import model.Pair;
+import utils.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +140,7 @@ public class Chapter3Example {
 
         Maybe<String> source = Observable.fromArray(balls)
                 .reduce((ball1, ball2) -> ball2 + "(" + ball1 + ")");
-        source.subscribe(System.out::println);
+        source.subscribe(Log::i);
     }
 
     public void simpleDataQueryExample() {

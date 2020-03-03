@@ -7,7 +7,7 @@ public class Log {
     }
 
     public static void i(Object obj) {
-        System.out.println(obj);
+        System.out.println(getThreadName() + " | " + obj);
     }
 
     public static String getThreadName() {
