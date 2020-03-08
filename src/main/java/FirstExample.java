@@ -207,7 +207,7 @@ public class FirstExample {
 //		demo3.rxGugudan3();
 //		demo3.filterExample();
 //		demo3.filterExample2();
-		demo3.reduceExample();
+//		demo3.reduceExample();
 //		demo3.simpleDataQueryExample();
 
 		Chapter4Example demo4 = new Chapter4Example();
@@ -226,6 +226,15 @@ public class FirstExample {
 //		toExample.concatMapExample();
 //		toExample.switchMapExample();
 //		toExample.groupByExample();
-		toExample.scanExample();
+//		toExample.scanExample();
+
+		CombineOperatorExample coExample = new CombineOperatorExample();
+//		coExample.zipExample();
+//		coExample.zipExample2();
+//		coExample.zipIntervalExample();
+//		coExample.billsExample();
+//		coExample.billsExample2();
+//		coExample.zipWithExample();
+		coExample.combineLastestExample();
 	}
 }
