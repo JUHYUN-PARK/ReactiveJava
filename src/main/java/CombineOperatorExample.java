@@ -1,10 +1,17 @@
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.Single;
+import io.reactivex.functions.Action;
+import io.reactivex.observables.ConnectableObservable;
 import model.Shape;
 import org.apache.commons.lang3.tuple.Pair;
 import utils.CommonUtils;
 import utils.Log;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.Double.max;
@@ -157,6 +164,117 @@ public class CombineOperatorExample {
                         .zipWith(Observable.interval(150L, 200L, TimeUnit.MILLISECONDS),
                                 (shape, notUsed) -> Shape.getSuffix(shape)), (v1, v2) -> v1 + v2
         );
+
+        source.subscribe(Log::i);
+        CommonUtils.sleep(1000);
+    }
+
+    public void reactiveSum() {
+        ConnectableObservable<String> source = userInput();
+        Observable<Integer> a = source.filter(str -> str.startsWith("a:"))
+                .map(str -> str.replace("a:", ""))
+                .map(Integer::parseInt);
+        Observable<Integer> b = source.filter(str -> str.startsWith("b:"))
+                .map(str -> str.replace("b:", ""))
+                .map(Integer::parseInt);
+        Observable.combineLatest(
+                a.startWith(0),
+                b.startWith(0),
+                (x, y) -> x + y
+        ).subscribe(res -> System.out.println("Result: " + res));
+        source.connect();
+    }
+
+    public ConnectableObservable<String> userInput() {
+        return Observable.create((ObservableEmitter<String> emiiter) -> {
+            Scanner in = new Scanner(System.in);
+            while(true) {
+                System.out.println("Input: ");
+                String line = in.nextLine();
+                emiiter.onNext(line);
+
+                if(line.indexOf("exit") >= 0) {
+                    in.close();
+                    break;
+                }
+            }
+        }).publish();
+    }
+
+    public void mergeExample() {
+        String[] data1 = {"1", "3"};
+        String[] data2 = {"2", "4", "6"};
+
+        Observable<String> source1 = Observable.interval(0L, 100L, TimeUnit.MILLISECONDS)
+                .map(Long::intValue)
+                .map(idx -> data1[idx])
+                .take(data1.length);
+
+        Observable<String> source2 = Observable.interval(50L, TimeUnit.MILLISECONDS)
+                .map(Long::intValue)
+                .map(idx -> data2[idx])
+                .take(data2.length);
+
+        Observable<String> source = Observable.merge(source1, source2);
+
+        source.subscribe(Log::i);
+        CommonUtils.sleep(1000);
+    }
+
+    public void concatExample() {
+        Action onCompleteAction = () -> Log.d("onComplete()");
+        String[] data1 = {"1", "3", "5"};
+        String[] data2 = {"2", "4", "6"};
+
+        Observable<String> source1 = Observable.fromArray(data1)
+                .doOnComplete(onCompleteAction);
+        Observable<String> source2 = Observable.interval(100L, TimeUnit.MILLISECONDS)
+                .map(Long::intValue)
+                .map(idx -> data2[idx])
+                .take(data2.length)
+                .doOnComplete(onCompleteAction);
+
+        Observable<String> source = Observable.concat(source1, source2)
+                .doOnComplete(onCompleteAction);
+        source.subscribe(Log::i);
+        CommonUtils.sleep(1000);
+    }
+
+    public void ambExample() {
+        String[] data1 = {"1", "3", "5"};
+        String[] data2 = {"2-R", "4-R"};
+
+        List<Observable<String>> sources = Arrays.asList(
+                Observable.fromArray(data1)
+                        .doOnComplete(() -> Log.d("Observable #1: onComplete()")),
+                Observable.fromArray(data2)
+                        .delay(100L, TimeUnit.MILLISECONDS)
+                        .doOnComplete(() -> Log.d("Observable #2: onComplete("))
+        );
+
+        Observable.amb(sources)
+                .doOnComplete(() -> Log.d("Result: onComplete()"))
+                .subscribe(Log::i);
+        CommonUtils.sleep(1000);
+    }
+
+    public void takeUntilExample() {
+        String[] data = {"1", "2", "3", "4", "5", "6"};
+
+        Observable<String> source = Observable.fromArray(data)
+                .zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), (val, notUsed) -> val)
+                .takeUntil(Observable.timer(500L, TimeUnit.MILLISECONDS));
+
+        source.subscribe(Log::i);
+        CommonUtils.sleep(1000);
+    }
+
+    public void skipUntilExample() {
+        String[] data = {"1", "2", "3", "4", "5", "6"};
+
+        Observable<String> source = Observable.fromArray(data)
+                .zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), (val, notUsed) -> val)
+                .skipUntil(Observable.timer(500L, TimeUnit.MILLISECONDS));
 
         source.subscribe(Log::i);
         CommonUtils.sleep(1000);

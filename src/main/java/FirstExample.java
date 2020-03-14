@@ -235,6 +235,12 @@ public class FirstExample {
 //		coExample.billsExample();
 //		coExample.billsExample2();
 //		coExample.zipWithExample();
-		coExample.combineLastestExample();
+//		coExample.combineLastestExample();
+//		coExample.reactiveSum();
+//		coExample.mergeExample();
+//		coExample.concatExample();
+//		coExample.ambExample();
+//		coExample.takeUntilExample();
+		coExample.skipUntilExample();
 	}
 }

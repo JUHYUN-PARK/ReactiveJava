@@ -10,6 +10,10 @@ public class Log {
         System.out.println(getThreadName() + " | " + obj);
     }
 
+    public static void d(Object obj) {
+        System.out.println(getThreadName() + " | " + obj);
+    }
+
     public static String getThreadName() {
         return Thread.currentThread().getName();
     }
