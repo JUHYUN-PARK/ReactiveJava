@@ -1,8 +1,11 @@
+package ch4;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.Single;
 import io.reactivex.functions.Action;
 import io.reactivex.observables.ConnectableObservable;
+import io.reactivex.observables.GroupedObservable;
 import model.Shape;
 import org.apache.commons.lang3.tuple.Pair;
 import utils.CommonUtils;
@@ -278,5 +281,14 @@ public class CombineOperatorExample {
 
         source.subscribe(Log::i);
         CommonUtils.sleep(1000);
+    }
+
+    public void allExample() {
+        String[] data = {"1", "2", "3", "4"};
+
+        Single<Boolean> source = Observable.fromArray(data)
+                .map(Shape::getShape)
+                .all(Shape.BALL::equals);
+        source.subscribe(Log::i);
     }
 }

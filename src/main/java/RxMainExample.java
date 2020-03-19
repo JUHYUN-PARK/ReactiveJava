@@ -1,3 +1,9 @@
+import ch3.Chapter3Example;
+import ch4.Chapter4Example;
+import ch4.CombineOperatorExample;
+import ch4.MathOperatorExample;
+import ch4.TransformOperatorExample;
+import ch5.SchedulerExample;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.Single;
@@ -15,7 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-public class FirstExample {
+public class RxMainExample {
 	public void emit() {
 		Observable.just(1, 2, 3, 4, 5, 6)
 		.subscribe(System.out::println);
@@ -179,7 +185,7 @@ public class FirstExample {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		FirstExample demo = new FirstExample();
+		RxMainExample demo = new RxMainExample();
 //		demo.emit();
 //		demo.code2by2();
 //		demo.code2by3();
@@ -241,6 +247,18 @@ public class FirstExample {
 //		coExample.concatExample();
 //		coExample.ambExample();
 //		coExample.takeUntilExample();
-		coExample.skipUntilExample();
+//		coExample.skipUntilExample();
+//		coExample.allExample();
+
+		MathOperatorExample moExample = new MathOperatorExample();
+//		moExample.mathFunctionExample();
+//		moExample.delayExample();
+//		moExample.timeIntervalExample();
+
+		SchedulerExample schedulerExample = new SchedulerExample();
+//		schedulerExample.introExample();
+//		schedulerExample.flipExample();
+//		schedulerExample.newThreadSchedulerExample();
+		schedulerExample.computationSchedulerExample();
 	}
 }

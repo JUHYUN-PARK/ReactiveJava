@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Random;
+
 public class CommonUtils {
     public static long startTime;
 
@@ -23,5 +25,13 @@ public class CommonUtils {
         if(obj.endsWith("-T")) return "TRIANGLE";
         if(obj.endsWith("-<>")) return "DIAMOND";
         return "BALL";
+    }
+
+    public static void doSomething() {
+        try {
+            Thread.sleep(new Random().nextInt(100));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

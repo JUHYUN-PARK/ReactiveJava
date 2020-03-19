@@ -1,3 +1,5 @@
+package ch3;
+
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
