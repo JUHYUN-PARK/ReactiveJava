@@ -5,6 +5,8 @@ import java.util.Random;
 public class CommonUtils {
     public static long startTime;
 
+    public static final String GITHUB_ROOT = "https://raw.githubusercontent.com/yudong80/reactivejava/master/";
+
     public static void exampleStart() {
         startTime = System.currentTimeMillis();
     }
@@ -33,5 +35,11 @@ public class CommonUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
+
+    public static String numberToAlphabet(long x) {
+        return Character.toString(ALPHABET.charAt((int) x % ALPHABET.length()));
     }
 }

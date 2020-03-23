@@ -4,6 +4,9 @@ import ch4.CombineOperatorExample;
 import ch4.MathOperatorExample;
 import ch4.TransformOperatorExample;
 import ch5.SchedulerExample;
+import ch5.sample.CallbackHeaven;
+import ch5.sample.CallbackHell;
+import ch5.sample.HttpGetExample;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.Single;
@@ -259,6 +262,20 @@ public class RxMainExample {
 //		schedulerExample.introExample();
 //		schedulerExample.flipExample();
 //		schedulerExample.newThreadSchedulerExample();
-		schedulerExample.computationSchedulerExample();
+//		schedulerExample.computationSchedulerExample();
+//		schedulerExample.IOSchedulerExample();
+//		schedulerExample.trampolineSchedulerExample();
+//		schedulerExample.singleThreadSchedulerExample();
+//		schedulerExample.executorSchedulerExample();
+
+		HttpGetExample he = new HttpGetExample();
+//		he.run();
+
+		CallbackHell ch = new CallbackHell();
+//		ch.run();
+
+		CallbackHeaven cv = new CallbackHeaven();
+//		cv.usingConcat();
+		cv.usingZip();
 	}
 }
