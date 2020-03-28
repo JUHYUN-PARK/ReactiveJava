@@ -23,4 +23,9 @@ public class OkHttpHelper {
             throw  e;
         }
     }
+
+    public static String getWithLog(String url) throws IOException {
+        Log.d("OkHttp call URL = " + url);
+        return get(url);
+    }
 }

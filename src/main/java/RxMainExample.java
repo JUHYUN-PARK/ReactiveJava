@@ -7,6 +7,8 @@ import ch5.SchedulerExample;
 import ch5.sample.CallbackHeaven;
 import ch5.sample.CallbackHell;
 import ch5.sample.HttpGetExample;
+import ch5.sample2.ImprovedOpenWeatherMap;
+import ch5.sample2.OpenWeatherMap;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.Single;
@@ -276,6 +278,12 @@ public class RxMainExample {
 
 		CallbackHeaven cv = new CallbackHeaven();
 //		cv.usingConcat();
-		cv.usingZip();
+//		cv.usingZip();
+
+		OpenWeatherMap owm = new OpenWeatherMap();
+//		owm.run();
+
+		ImprovedOpenWeatherMap iopwm = new ImprovedOpenWeatherMap();
+		iopwm.run();
 	}
 }
