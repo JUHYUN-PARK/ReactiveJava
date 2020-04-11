@@ -1,17 +1,37 @@
 package utils;
 
 public class Log {
-    public static void it(Object obj) {
-        long time = System.currentTimeMillis() - CommonUtils.startTime;
-        System.out.println(getThreadName() + " | " + time + " | " + "value = " + obj);
+    public static void d(String tag, Object obj) {
+        System.out.println(getThreadName() + " | " + tag + " | debug = " + obj);
     }
 
-    public static void i(Object obj) {
+    public static void e(String tag, Object obj) {
+        System.out.println(getThreadName() + " | " + tag + " | error = " + obj);
+    }
+
+    public static void i(String tag, Object obj) {
+        System.out.println(getThreadName() + " | " + tag + " | value = " + obj);
+    }
+
+    public static void v(Object obj) {
         System.out.println(getThreadName() + " | " + obj);
     }
 
     public static void d(Object obj) {
-        System.out.println(getThreadName() + " | " + obj);
+        System.out.println(getThreadName() + " | debug = " + obj);
+    }
+
+    public static void e(Object obj) {
+        System.out.println(getThreadName() + " | error = " + obj);
+    }
+
+    public static void i(Object obj) {
+        System.out.println(getThreadName() + " | value = " + obj);
+    }
+
+    public static void it(Object obj) {
+        long time = System.currentTimeMillis() - CommonUtils.startTime;
+        System.out.println(getThreadName() + " | " + time + " | " + "value = " + obj);
     }
 
     public static String getThreadName() {

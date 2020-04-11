@@ -289,6 +289,6 @@ public class CombineOperatorExample {
         Single<Boolean> source = Observable.fromArray(data)
                 .map(Shape::getShape)
                 .all(Shape.BALL::equals);
-        source.subscribe(Log::i);
+//        source.subscribe(Log::i);
     }
 }

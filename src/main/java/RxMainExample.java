@@ -9,6 +9,8 @@ import ch5.sample.CallbackHell;
 import ch5.sample.HttpGetExample;
 import ch5.sample2.ImprovedOpenWeatherMap;
 import ch5.sample2.OpenWeatherMap;
+import ch7.DoOnMethodExample;
+import ch7.ErrorHandlingExample;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.Single;
@@ -284,6 +286,18 @@ public class RxMainExample {
 //		owm.run();
 
 		ImprovedOpenWeatherMap iopwm = new ImprovedOpenWeatherMap();
-		iopwm.run();
+//		iopwm.run();
+
+		DoOnMethodExample dom = new DoOnMethodExample();
+//		dom.simpleExample();
+//		dom.simpleErrorExample();
+//		dom.doOnEachExample();
+//		dom.similarDoOnEachExample();
+//		dom.doOnSubDispExample();
+//		dom.doOnLifecycleExample();
+
+		ErrorHandlingExample ehe = new ErrorHandlingExample();
+//		ehe.onErrorReturnExample();
+		ehe.onErrorExample();
 	}
 }
