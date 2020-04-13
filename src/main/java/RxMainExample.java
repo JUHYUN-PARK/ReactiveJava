@@ -298,6 +298,9 @@ public class RxMainExample {
 
 		ErrorHandlingExample ehe = new ErrorHandlingExample();
 //		ehe.onErrorReturnExample();
-		ehe.onErrorExample();
+//		ehe.onErrorExample();
+//		ehe.onErrorReturnItemExample();
+//		ehe.onErrorResumeNextExample();
+		ehe.retryExample1();
 	}
 }

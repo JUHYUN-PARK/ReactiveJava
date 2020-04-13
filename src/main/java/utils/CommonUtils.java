@@ -7,6 +7,8 @@ public class CommonUtils {
 
     public static final String GITHUB_ROOT = "https://raw.githubusercontent.com/yudong80/reactivejava/master/";
 
+    public static final String ERROR_CODE = "-500";
+
     public static void exampleStart() {
         startTime = System.currentTimeMillis();
     }

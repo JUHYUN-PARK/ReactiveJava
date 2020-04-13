@@ -34,6 +34,26 @@ public class Log {
         System.out.println(getThreadName() + " | " + time + " | " + "value = " + obj);
     }
 
+    public static void dt(Object obj) {
+        long time = System.currentTimeMillis() - CommonUtils.startTime;
+        System.out.println(getThreadName() + " | " + time + " | " + "debug = " + obj);
+    }
+
+    public static void et(Object obj) {
+        long time = System.currentTimeMillis() - CommonUtils.startTime;
+        System.out.println(getThreadName() + " | " + time + " | " + "error = " + obj);
+    }
+
+    public static void onNextT(Object obj) {
+        long time = System.currentTimeMillis() - CommonUtils.startTime;
+        System.out.println(getThreadName() + " | " + time + " | " + "onNext >> " + obj);
+    }
+
+    public static void onCompleteT() {
+        long time = System.currentTimeMillis() - CommonUtils.startTime;
+        System.out.println(getThreadName() + " | " + time + " | " + "onComplete");
+    }
+
     public static String getThreadName() {
         return Thread.currentThread().getName();
     }
