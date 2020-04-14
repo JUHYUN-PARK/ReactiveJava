@@ -1,11 +1,14 @@
 package ch7;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 import network.OkHttpHelper;
 import utils.CommonUtils;
 import utils.Log;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Rxjava는 try-catch를 통해 에러 핸들링 불가
@@ -108,6 +111,10 @@ public class ErrorHandlingExample {
         });
     }
 
+    /**
+     * onError가 발생하면 subscribe() 를 다시 호출해 재구독하는 방식
+     * 오버로딩된 함수들로 throwable 처리, retry 횟수 지정 등 가능
+     */
     public void retryExample1() {
         CommonUtils.exampleStart();
 
@@ -118,5 +125,65 @@ public class ErrorHandlingExample {
                 .onErrorReturn(e -> CommonUtils.ERROR_CODE);
 
         source.subscribe(data -> Log.it("result: " + data));
+    }
+
+    /**
+     * retry 시 딜레이를 주는 예제
+     */
+    final int RETRY_MAX = 5;
+    final int RETRY_DELAY = 1000;
+
+    public void retryExample2() {
+        CommonUtils.exampleStart();
+
+        String url = "https://api.github.com/zen";
+        Observable<String> source = Observable.just(url)
+                .map(OkHttpHelper::getT)
+                .retry((retryCnt, e) -> {
+                    Log.e("retryCnt = " + retryCnt);
+                    CommonUtils.sleep(RETRY_DELAY);
+
+                    return retryCnt < RETRY_MAX ? true : false;
+                }).onErrorReturn(e -> CommonUtils.ERROR_CODE);
+
+        source.subscribe(data -> Log.it("result: " + data));
+    }
+
+    /**
+     * 특정조건을 만족할 때 까지 진행
+     * BooleanSupplier 인터페이스를 인자로 받음
+     */
+    public void retryUntilExample() {
+        CommonUtils.exampleStart();
+
+        String url = "https://api.github.com/zen";
+        Observable<String> source = Observable.just(url)
+                .map(OkHttpHelper::getT)
+                .subscribeOn(Schedulers.io())
+                .retryUntil(() -> {
+                    if(CommonUtils.isNetworkAvailable())
+                        return true;
+
+                    CommonUtils.sleep(1000);
+                    return false;
+                });
+        source.subscribe(Log::i);
+
+        CommonUtils.sleep(5000);
+    }
+
+    /**
+     * 이건 어려움... 먼소린지 다시 봐야겠음
+     */
+    public void retryWhenExample() {
+        Observable.create((ObservableEmitter<String> emiiter) -> {
+            emiiter.onError(new RuntimeException("always fails"));
+        }).retryWhen(attempts -> {
+            return attempts.zipWith(Observable.range(1, 3), (n, i) -> i)
+                    .flatMap(i -> {
+                        Log.d("delay retry by " + i + " seconds");
+                        return Observable.timer(i, TimeUnit.SECONDS);
+                    });
+        }).blockingForEach(Log::d);
     }
 }

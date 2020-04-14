@@ -1,5 +1,7 @@
 package utils;
 
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Random;
 
 public class CommonUtils {
@@ -43,5 +45,18 @@ public class CommonUtils {
 
     public static String numberToAlphabet(long x) {
         return Character.toString(ALPHABET.charAt((int) x % ALPHABET.length()));
+    }
+
+    public static boolean isNetworkAvailable() {
+        try {
+            return InetAddress.getByName("www.google.com").isReachable(1000);
+        } catch (IOException e) {
+            Log.v("Network is not available");
+        }
+        return false;
+    }
+
+    public static int toInt(String val) {
+        return Integer.parseInt(val);
     }
 }

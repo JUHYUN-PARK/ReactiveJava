@@ -301,6 +301,9 @@ public class RxMainExample {
 //		ehe.onErrorExample();
 //		ehe.onErrorReturnItemExample();
 //		ehe.onErrorResumeNextExample();
-		ehe.retryExample1();
+//		ehe.retryExample1();
+//		ehe.retryExample2();
+//		ehe.retryUntilExample();
+		ehe.retryWhenExample();
 	}
 }
