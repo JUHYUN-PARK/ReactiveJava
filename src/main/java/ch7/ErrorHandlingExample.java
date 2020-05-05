@@ -186,4 +186,35 @@ public class ErrorHandlingExample {
                     });
         }).blockingForEach(Log::d);
     }
+
+    /**
+     * 특정시간동안 가장 최근에 발행한 데이터만 걸러주는 함수
+     */
+    public void sampleExample() {
+        String[] data = {"1", "7", "2", "3", "6"};
+
+        CommonUtils.exampleStart();
+
+        Observable<String> earlySource = Observable.fromArray(data)
+                .take(4)
+                .zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), (a, b) -> a);
+
+        Observable<String> lateSource = Observable.just(data[4])
+                .zipWith(Observable.timer(300L, TimeUnit.MILLISECONDS), (a, b) -> a);
+
+        Observable<String> source = Observable.concat(earlySource, lateSource)
+                .doOnNext(next -> Log.it("data:" + next))
+                .sample(300L, TimeUnit.MILLISECONDS, true);
+
+        source.subscribe(Log::it);
+        CommonUtils.sleep(1000);
+    }
+
+    /**
+     * 특정시간동안 발행된 데이터를 모아뒀다가 한방에 발행해 줌
+     * List 객체에 담아서 줌... 친절하네
+     */
+    public void bufferExample() {
+        
+    }
 }
